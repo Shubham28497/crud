@@ -1,0 +1,68 @@
+{
+  "productList": [
+    {
+      "productName": "apple",
+      "category": "Fruits",
+      "freshness": "Brandnew",
+      "price": 100,
+      "comment": "fresh",
+      "date": "2022-08-20T18:30:00.000Z",
+      "id": 1
+    },
+    {
+      "productName": "samsung",
+      "category": "Electronic",
+      "freshness": "Brandnew",
+      "price": 58900,
+      "comment": "smartphone",
+      "date": "2022-08-21T18:30:00.000Z",
+      "id": 2
+    },
+    {
+      "productName": "iphone",
+      "category": "Electronic",
+      "freshness": "Brandnew",
+      "price": 129000,
+      "comment": "smartphone",
+      "date": "2022-08-21T18:30:00.000Z",
+      "id": 3
+    },
+    {
+      "productName": "orange",
+      "category": "Fruits",
+      "freshness": "Brandnew",
+      "price": 80,
+      "comment": "fresh",
+      "date": "2022-08-21T18:30:00.000Z",
+      "id": 4
+    },
+    {
+      "productName": "banana",
+      "category": "Fruits",
+      "freshness": "Brandnew",
+      "price": 90,
+      "comment": "fresh",
+      "date": "2022-08-21T18:30:00.000Z",
+      "id": 5
+    },
+    {
+      "productName": "mango",
+      "category": "Fruits",
+      "freshness": "Brandnew",
+      "price": 90,
+      "comment": "fresh",
+      "date": "2022-08-21T18:30:00.000Z",
+      "id": 6
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

@@ -1,0 +1,80 @@
+import { IfStmt, THIS_EXPR, ThrowStmt } from '@angular/compiler/src/output/output_ast';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { ApiService } from 'src/services/api.service';
+import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+@Component({
+  selector: 'app-dailog',
+  templateUrl: './dailog.component.html',
+  styleUrls: ['./dailog.component.css']
+})
+export class DailogComponent implements OnInit {
+  actionBtn:string='Save'
+freshList=["Brandnew", "Secondhand", "Refurbished"]
+productForm!: FormGroup
+  constructor(private formBuilder:FormBuilder,private apiservice:ApiService,
+    @Inject(MAT_DIALOG_DATA ) public editData :any,
+    private dialogRef:MatDialogRef<DailogComponent> ) { }
+
+  ngOnInit(): void {
+    this.productForm=this.formBuilder.group({
+      productName:['',Validators.required],
+      category:['',Validators.required],
+      freshness:['',Validators.required],
+      price:['',Validators.required],
+      comment:['',Validators.required],
+      date:['',Validators.required],
+
+
+    })
+    if(this.editData){
+      this.actionBtn="Update"
+  this.productForm.controls['productName'].setValue(this.editData.productName)
+  this.productForm.controls['category'].setValue(this.editData.category)
+  this.productForm.controls['freshness'].setValue(this.editData.freshness)
+  this.productForm.controls['price'].setValue(this.editData.price)
+  this.productForm.controls['comment'].setValue(this.editData.comment)
+  this.productForm.controls['date'].setValue(this.editData.date)
+
+
+
+    }
+  console.log(this.editData)
+  }
+  addProduct(){
+    console.log(this.productForm.value)
+   if(!this.editData){
+    if(this.productForm.valid){
+      this.apiservice.postProduct(this.productForm.value)
+      .subscribe({
+          next:(res)=>{
+            alert("Product Succesfully Added")
+            this.productForm.reset();
+            this.dialogRef.close('save');
+          } ,
+          error:()=>{
+            alert("Error while adding the product")
+          } 
+      })
+    }
+   }
+   else{
+    this.updateProduct()
+   }
+  }
+  updateProduct(){
+    this.apiservice.putProduct(this.productForm.value,this.editData.id)
+    .subscribe({
+      next:(res)=>{
+      alert ("Product Updated Succesfully")
+      this.productForm.reset();
+      this.dialogRef.close('update');
+      },
+      error:()=>{
+        alert("Error while updating the record")
+      }
+    })
+  }
+
+}
